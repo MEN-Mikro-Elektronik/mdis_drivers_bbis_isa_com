@@ -145,7 +145,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr );
 #ifdef _ONE_NAMESPACE_PER_DRIVER_
 	extern void BBIS_GetEntry( BBIS_ENTRY *bbisP )
 #else
-#	ifdef MAC_IO_MAPPED 
+#	ifdef MAC_IO_MAPPED
 		extern void ISA_IO_GetEntry( BBIS_ENTRY *bbisP )
 #	else
 		extern void ISA_GetEntry( BBIS_ENTRY *bbisP )
@@ -211,10 +211,10 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr );
  *                DEVICE_NAME            BBIS_SLOT_STR_UNK  DEVNAME_SIZE
  *
  *---------------------------------------------------------------------------
- *  Input......:  osHdl     pointer to os specific structure             
- *                descSpec  pointer to os specific descriptor specifier  
- *                brdHdlP   pointer to not initialized board handle structure            
- *  Output.....:  *brdHdlP  initialized board handle structure  
+ *  Input......:  osHdl     pointer to os specific structure
+ *                descSpec  pointer to os specific descriptor specifier
+ *                brdHdlP   pointer to not initialized board handle structure
+ *  Output.....:  *brdHdlP  initialized board handle structure
  *				  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -308,11 +308,11 @@ static int32 ISA_Init(
 
 	/* get DEVICE_NAME (optional) */
 	devNameSize = DEVNAME_SIZE;
-	status = DESC_GetString( brdHdl->descHdl, BBIS_SLOT_STR_UNK, brdHdl->devName, 
+	status = DESC_GetString( brdHdl->descHdl, BBIS_SLOT_STR_UNK, brdHdl->devName,
 							 &devNameSize, "DEVICE_NAME" );
 	if ( status && (status!=ERR_DESC_KEY_NOTFOUND) )
 		return( Cleanup(brdHdl,status) );
-#if DBG		
+#if DBG
 	if( status == ERR_SUCCESS )
 		DBGWRT_2(( DBH, " DEVICE_NAME=%s\n", brdHdl->devName ));
 #endif
@@ -332,7 +332,7 @@ static int32 ISA_Init(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure    
+ *  Input......:  brdHdl    pointer to board handle structure
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -351,7 +351,7 @@ static int32 ISA_BrdInit(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
+ *  Input......:  brdHdl    pointer to board handle structure
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -417,8 +417,8 @@ static int32 ISA_Exit(
  *                the specified board.
  *
  *                The BBIS_BRDINFO_DEVBUSTYPE code returns the bustype of
- *                the specified device - not the board bus type. 
- * 				  
+ *                the specified device - not the board bus type.
+ *
  *                The BBIS_BRDINFO_FUNCTION code returns the information
  *                if an optional BBIS function is supported or not.
  *
@@ -439,11 +439,11 @@ static int32 ISA_Exit(
  *                characters. The length of the returned string, including
  *                the terminating null character, must not exceed
  *                BBIS_BRDINFO_BRDNAME_MAXSIZE.
- *                Examples: D201 board, PCI device, Chameleon FPGA 
+ *                Examples: D201 board, PCI device, Chameleon FPGA
  *
  *---------------------------------------------------------------------------
- *  Input......:  code      reference to the information we need    
- *                ...       variable arguments                      
+ *  Input......:  code      reference to the information we need
+ *                ...       variable arguments
  *  Output.....:  *...      variable arguments
  *                return    0 | error code
  *  Globals....:  ---
@@ -458,7 +458,7 @@ static int32 ISA_BrdInfo(
     va_start(argptr,code);
 
     switch ( code ) {
-        
+
         /* supported functions */
         case BBIS_BRDINFO_FUNCTION:
         {
@@ -479,7 +479,7 @@ static int32 ISA_BrdInfo(
             *numSlot = BRD_NBR_OF_BRDDEV;
             break;
         }
-		
+
 		/* bus type */
         case BBIS_BRDINFO_BUSTYPE:
         {
@@ -532,16 +532,16 @@ static int32 ISA_BrdInfo(
 			char	*brdName = va_arg( argptr, char* );
 			char	*from;
 
-			/* 
+			/*
 			 * build hw name
-			 */  
+			 */
 #ifdef MAC_MEM_MAPPED
 			from = "ISA device";
 #else
 			from = "ISA_IO device";
 #endif
 			while( (*brdName++ = *from++) );	/* copy string */
-			
+
 			break;
 		}
 
@@ -583,9 +583,9 @@ static int32 ISA_BrdInfo(
  *                the name of the plugged device.
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure       
- *                code      reference to the information we need    
- *                ...       variable arguments                      
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                code      reference to the information we need
+ *                ...       variable arguments
  *  Output.....:  ...       variable arguments
  *                return    0 | error code
  *  Globals....:  ---
@@ -672,7 +672,7 @@ static int32 ISA_CfgInfo(
 		/* slot information for PnP support*/
 		case BBIS_CFGINFO_SLOT:
 		{
-			status = CfgInfoSlot( brdHdl, argptr ); 
+			status = CfgInfoSlot( brdHdl, argptr );
 			break;
 		}
 
@@ -694,9 +694,9 @@ static int32 ISA_CfgInfo(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                enable    interrupt setting                   
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                enable    interrupt setting
  *  Output.....:  return    0
  *  Globals....:  ---
  ****************************************************************************/
@@ -717,8 +717,8 @@ static int32 ISA_IrqEnable(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  return    BBIS_IRQ_UNK
  *  Globals....:  ---
  ****************************************************************************/
@@ -738,8 +738,8 @@ static int32 ISA_IrqSrvInit(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  ---
  *  Globals....:  ---
  ****************************************************************************/
@@ -757,9 +757,9 @@ static void ISA_IrqSrvExit(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                enable    interrupt setting                   
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                enable    interrupt setting
  *  Output.....:  return    0
  *  Globals....:  ---
  ****************************************************************************/
@@ -780,8 +780,8 @@ static int32 ISA_ExpEnable(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  return    BBIS_IRQ_NO
  *  Globals....:  ---
  ****************************************************************************/
@@ -801,10 +801,10 @@ static int32 ISA_ExpSrv(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24       
- *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32       
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24
+ *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32
  *  Output.....:  return    0
  *  Globals....:  ---
  ****************************************************************************/
@@ -826,8 +826,8 @@ static int32 ISA_SetMIface(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  return    0
  *  Globals....:  ---
  ****************************************************************************/
@@ -848,12 +848,12 @@ static int32 ISA_ClrMIface(
  *                - assign address spaces
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24    
- *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32      
- *                mAddr     pointer to address space            
- *                mSize     size of address space               
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24
+ *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32
+ *                mAddr     pointer to address space
+ *                mSize     size of address space
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -894,10 +894,10 @@ static int32 ISA_GetMAddr(
  *                M_BB_DEBUG_LEVEL     board debug level          see dbg.h
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl        pointer to board handle structure           
- *                mSlot         module slot number                          
- *                code          setstat code                                
- *                value32_or_64 setstat value or ptr to blocksetstat data   
+ *  Input......:  brdHdl        pointer to board handle structure
+ *                mSlot         module slot number
+ *                code          setstat code
+ *                value32_or_64 setstat value or ptr to blocksetstat data
  *  Output.....:  return        0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -941,9 +941,9 @@ static int32 ISA_SetStat(
  *                M_MK_BLK_REV_ID      ident function table ptr   -
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl         pointer to board handle structure           
- *                mSlot          module slot number                          
- *                code           getstat code                                
+ *  Input......:  brdHdl         pointer to board handle structure
+ *                mSlot          module slot number
+ *                code           getstat code
  *  Output.....:  value32_or_64P getstat value or ptr to blockgetstat data
  *                return         0 | error code
  *  Globals....:  ---
@@ -1016,7 +1016,7 @@ static int32 ISA_Unused( void )		/* nodoc */
 
 /*********************************** Ident **********************************
  *
- *  Description:  Return ident string 
+ *  Description:  Return ident string
  *
  *---------------------------------------------------------------------------
  *  Input......:  -
@@ -1025,7 +1025,7 @@ static int32 ISA_Unused( void )		/* nodoc */
  ****************************************************************************/
 static char* Ident( void )		/* nodoc */
 {
-	return ( 
+	return (
 		"ISA - ISA Base Board Handler: $Id: bb_isa.c,v 1.5 2009/08/17 15:25:10 dpfeuffer Exp $" );
 }
 
@@ -1035,9 +1035,9 @@ static char* Ident( void )		/* nodoc */
  *
  *		          NOTE: The brdHdl handle is invalid after calling this
  *                      function.
- *			   
+ *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure           
+ *  Input......:  brdHdl    pointer to board handle structure
  *                retCode	return value
  *  Output.....:  return	retCode
  *  Globals....:  -
@@ -1062,6 +1062,7 @@ static int32 Cleanup(
     +------------------------------*/
     /* release memory for the board handle */
     OSS_MemFree( brdHdl->osHdl, (int8*)brdHdl, brdHdl->ownMemSize);
+    brdHdl = NULL;
 
     /*------------------------------+
     |  return error code            |
@@ -1072,21 +1073,21 @@ static int32 Cleanup(
 /********************************* CfgInfoSlot ******************************
  *
  *  Description:  Fulfils the BB_CfgInfo(BBIS_CFGINFO_SLOT) request
- * 
+ *
  *				  The variable-argument list (argptr) contains the following
  *                parameters in the given order:
  *
  *                Input
  *                -----
- *                mSlot (u_int32) - device slot number  
+ *                mSlot (u_int32) - device slot number
  *
  *                Output
  *                ------
  *                occupied (u_int32*) - occupied information
- *                 - pluggable device: 
+ *                 - pluggable device:
  *                   BBIS_SLOT_OCCUP_YES if slot is occupied
  *                   or BBIS_SLOT_OCCUP_NO if slot is empty
- *                 - onboard device: 
+ *                 - onboard device:
  *                   BBIS_SLOT_OCCUP_ALW if device is enabled
  *                   or BBIS_SLOT_OCCUP_DIS if device is disabled
  *
@@ -1094,7 +1095,7 @@ static int32 Cleanup(
  *                  The device id should identify the type of the device
  *                  but should not contain enough information to differentiate
  *                  between two identical devices. If the device id is unknown
- *                  BBIS_SLOT_NBR_UNK must be returned. 
+ *                  BBIS_SLOT_NBR_UNK must be returned.
  *                  - M-Module:
  *                    id-prom-magic-word << 16 | id-prom-module-id
  *                    Example: 0x53460024
@@ -1109,12 +1110,12 @@ static int32 Cleanup(
  *					  be 0x00001543.
  *
  *                  Note: The returned device id must be identical to the
- *                        "autoid" value in the device drivers xml file.  
+ *                        "autoid" value in the device drivers xml file.
  *
  *                devRev (u_int32*) - device revision (4-byte hex value)
  *                  M-Module: id-prom-layout-revision << 16 |
  *                            id-prom-product-variant
- *                            example: 0x01091400       
+ *                            example: 0x01091400
  *                  or BBIS_SLOT_NBR_UNK if device revision is unknown
  *
  *                slotName (char*) - slot name
@@ -1138,12 +1139,12 @@ static int32 Cleanup(
  *                  characters or blanks. The length of the returned string,
  *                  including the terminating null character, must not exceed
  *                  BBIS_SLOT_STR_MAXSIZE.
- * 
+ *
  *                  Examples:
  *                  - Mezzanines:		"M34", "MS9"
  *                  - Onboard Devices:	"LM78", "F2_GPIO", "I82527"
  *                                      "D203_TRIG"
- *                  
+ *
  *                  If the device name is unknown BBIS_SLOT_STR_UNK must
  *                  be returned.
  *
@@ -1197,7 +1198,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr )	/* nodoc */
 	/* set device name (from descriptor or unknown) */
 	OSS_StrCpy( brdHdl->osHdl, brdHdl->devName, devName );
 
-	/* return on success */ 
+	/* return on success */
 	return ERR_SUCCESS;
 }
 
