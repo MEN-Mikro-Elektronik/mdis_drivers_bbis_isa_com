@@ -286,8 +286,8 @@ static int32 ISA_Init(
     /* get DEBUG_LEVEL_DESC (optional) */
     status = DESC_GetUInt32(brdHdl->descHdl, OSS_DBG_DEFAULT, &value,
 				"DEBUG_LEVEL_DESC");
-    if ( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );
+	if ( status && (status!=ERR_DESC_KEY_NOTFOUND) )
+		return( Cleanup(brdHdl,status) );
 
 	/* set debug level for DESC module */
 	DESC_DbgLevelSet(brdHdl->descHdl, value);
@@ -317,8 +317,8 @@ static int32 ISA_Init(
     /* get IRQ_NUMBER (optional) */
     status = DESC_GetUInt32( brdHdl->descHdl, 0, &(brdHdl->irqNbr),
                 "IRQ_NUMBER");
-    if ( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );
+	if ( status && (status!=ERR_DESC_KEY_NOTFOUND) )
+		return( Cleanup(brdHdl,status) );
 
 	/* get DEVICE_NAME (optional) */
 	devNameSize = DEVNAME_SIZE;
@@ -888,7 +888,7 @@ static int32 ISA_GetMAddr(
 	}
 
 	/* assign address spaces */
-	*mAddr = (void*)brdHdl->devAddr;
+	*mAddr = (void*)(U_INT32_OR_64)brdHdl->devAddr;
     *mSize = brdHdl->devAddrSize;
 
 	DBGWRT_2((DBH, " mSlot=0x%04x : address=%08p, length=0x%x\n",
