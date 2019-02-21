@@ -27,33 +27,9 @@
  *				 MAC_IO_MAPPED				:	i/o access
  *				 ISA						:	generic ISA bbis
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: bb_isa.c,v $
- * Revision 1.5  2009/08/17 15:25:10  dpfeuffer
- * R:1. Porting to MDIS5 (according porting guide rev. 0.7)
- * M:1.a) added support for 64bit (ISA_Set/GetStat)
- *     b) adapted DBG prints for 64bit pointers
- *
- * Revision 1.4  2006/12/11 17:01:49  ufranke
- * changed
- *  - fkt13 is now setIrqHandle initialized to NULL
- *
- * Revision 1.3  2005/05/06 11:56:30  dpfeuffer
- * ISA_CfgInfo(): Bugfix: error handling was wrong
- *
- * Revision 1.2  2004/09/06 13:02:52  dpfeuffer
- * Enhancements for PnP OS implemented:
- * - PCI_BrdInfo(BBIS_BRDINFO_BRDNAME)
- * - PCI_CfgInfo(BBIS_CFGINFO_SLOT)
- * - descriptor key DEVICE_NAME added
- * uses now ISA_IO_GetEntry() for IO variant
- *
- * Revision 1.1  2000/02/28 14:19:30  Schmidt
- * Initial Revision
  *
  *---------------------------------------------------------------------------
- * (c) Copyright by MEN mikro elektronik GmbH, Nuremberg, Germany
+ * Copyright (c) 2019, MEN Mikro Elektronik GmbH
  ******************************************************************************/
 /*
  * This program is free software: you can redistribute it and/or modify

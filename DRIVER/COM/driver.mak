@@ -6,17 +6,8 @@
 #  
 #    Description: Makefile definitions for the ISA BBIS driver - memory access
 #                      
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver.mak,v $
-#   Revision 1.2  2004/09/06 13:02:54  dpfeuffer
-#   unused ISA switch removed
-#
-#   Revision 1.1  2000/02/28 14:19:33  Schmidt
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
-#   (c) Copyright 2000 by MEN mikro elektronik GmbH, Nuernberg, Germany 
+#   Copyright (c) 2000-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
