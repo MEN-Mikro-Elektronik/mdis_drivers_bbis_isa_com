@@ -302,7 +302,7 @@ static int32 ISA_Init(
 							 &devNameSize, "DEVICE_NAME" );
 	if ( status && (status!=ERR_DESC_KEY_NOTFOUND) )
 		return( Cleanup(brdHdl,status) );
-#if DBG
+#ifdef DBG
 	if( status == ERR_SUCCESS )
 		DBGWRT_2(( DBH, " DEVICE_NAME=%s\n", brdHdl->devName ));
 #endif
