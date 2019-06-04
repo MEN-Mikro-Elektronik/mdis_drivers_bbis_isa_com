@@ -4,8 +4,6 @@
  *      Project: ISA board handler
  *
  *       Author: ds
- *        $Date: 2009/08/17 15:25:10 $
- *    $Revision: 1.5 $
  *
  *  Description: Generic ISA Base Board handler
  *
@@ -89,6 +87,8 @@ typedef struct {
 /* include files which need BBIS_HANDLE */
 #include <MEN/bb_entry.h>	/* bbis jumptable				  */
 #include <MEN/bb_isa.h>		/* ISA bbis header file			  */
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*-----------------------------------------+
 |  PROTOTYPES                              |
@@ -1015,8 +1015,7 @@ static int32 ISA_Unused( void )		/* nodoc */
  ****************************************************************************/
 static char* Ident( void )		/* nodoc */
 {
-	return (
-		"ISA - ISA Base Board Handler: $Id: bb_isa.c,v 1.5 2009/08/17 15:25:10 dpfeuffer Exp $" );
+	return( (char*) IdentString );
 }
 
 /********************************* Cleanup **********************************
